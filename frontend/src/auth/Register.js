@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import RegisterForm from '../components/RegisterForm'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
-const Register = () => {
+const Register = ({ history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -11,14 +12,19 @@ const Register = () => {
     e.preventDefault()
 
     try {
-      const res = await axios.post(`http://localhost:8000/api/register`, {
+      const res = await axios.post(`${process.env.REACT_APP_API}/register`, {
         name,
         email,
         password
       })
       console.log('Registered user', res)
+      toast.success('Register Successful. Please Login')
+      history.push('/login')
     } catch (err) {
       console.log(err)
+      if (err.response.status === 400) {
+        toast.error(err.response.data)
+      }
     }
   }
 
