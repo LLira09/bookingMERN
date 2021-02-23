@@ -9,6 +9,20 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+    console.log('Send Data', { email, password })
+    try {
+      let res = await login({ email, password })
+
+      if (res.data) {
+        console.log('Save user res in redux and ls')
+        console.log(res.data)
+      }
+    } catch (err) {
+      console.log(err)
+      if (err.response.status === 400) {
+        toast.error(err.response.data)
+      }
+    }
   }
   return (
     <>

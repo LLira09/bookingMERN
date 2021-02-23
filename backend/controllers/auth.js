@@ -23,3 +23,25 @@ export const register = async (req, res) => {
     return res.status(400).send('Error, try again.')
   }
 }
+
+// Login
+export const login = async (req, res) => {
+  const { email, password } = req.body
+
+  try {
+    let user = await User.findOne({ email }).exec()
+
+    if (!user) res.status(400).send('User not found')
+    // Compare pwd
+    user.comparePassword(password, (err, match) => {
+      console.log('Passwords did not match')
+      if (!match || err) {
+        return res.status(400).send('Wrong password')
+      }
+      console.log('Gen token')
+    })
+  } catch (err) {
+    console.log('Login error')
+    res.status(400).send('Sign in Failed')
+  }
+}
