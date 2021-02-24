@@ -2,10 +2,13 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { login } from '../actions/auth'
 import LoginForm from '../components/LoginForm'
+import { useDispatch } from 'react-redux'
 
-const Login = () => {
+const Login = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const dispatch = useDispatch()
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -14,8 +17,14 @@ const Login = () => {
       let res = await login({ email, password })
 
       if (res.data) {
-        console.log('Save user res in redux and ls')
-        console.log(res.data)
+        //  Save user and token to ls
+        window.localStorage.setItem('auth', JSON.stringify(res.data))
+        // save to redux
+        dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: res.data
+        })
+        history.push('/')
       }
     } catch (err) {
       console.log(err)
