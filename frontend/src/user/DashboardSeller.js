@@ -1,7 +1,7 @@
 import DashboardNav from '../components/DashboardNav'
 import ConnectNav from '../components/ConnectNav'
 
-const Dashboard = () => {
+const DashboardSeller = () => {
   return (
     <>
       <div className='container-fluid bg-secondary p-5'>
@@ -11,10 +11,10 @@ const Dashboard = () => {
         <DashboardNav />
       </div>
       <div className='container'>
-        <p>Show all bookings</p>
+        <p>Show all Hotels user have posted</p>
       </div>
     </>
   )
 }
 
-export default Dashboard
+export default DashboardSeller

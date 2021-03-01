@@ -6,6 +6,7 @@ import Home from './booking/Home'
 import Login from './auth/Login'
 import Register from './auth/Register'
 import Dashboard from './user/Dashboard'
+import DashboardSeller from './user/DashboardSeller'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -20,6 +21,11 @@ function App() {
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
+        <PrivateRoute
+          exact
+          path='/dashboard/seller'
+          component={DashboardSeller}
+        />
       </Switch>
     </BrowserRouter>
   )
