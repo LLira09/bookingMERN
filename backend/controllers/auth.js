@@ -35,7 +35,6 @@ export const login = async (req, res) => {
     if (!user) res.status(400).send('User not found')
     // Compare pwd
     user.comparePassword(password, (err, match) => {
-      console.log('Passwords did not match')
       if (!match || err) {
         return res.status(400).send('Wrong password')
       }
