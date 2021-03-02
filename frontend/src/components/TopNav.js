@@ -17,10 +17,15 @@ const TopNav = () => {
     history.push('/login')
   }
   return (
-    <div className='nav bg-light d-flex justify-content-between'>
+    <div className='nav bg-light d-flex p-3'>
       <Link className='nav-link' to='/'>
         Home
       </Link>
+      {auth !== null && (
+        <Link className='nav-link' to='/dashboard'>
+          Dashboard
+        </Link>
+      )}
       {auth !== null && (
         <a href='' className='nav-link pointer' onClick={logout}>
           Logout
