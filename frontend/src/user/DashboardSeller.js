@@ -1,11 +1,28 @@
+import { useState } from 'react'
 import DashboardNav from '../components/DashboardNav'
 import ConnectNav from '../components/ConnectNav'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { HomeOutlined } from '@ant-design/icons'
+import { createConnectAccount } from '../actions/stripe'
+import { toast } from 'react-toastify'
 
 const DashboardSeller = () => {
   const { auth } = useSelector(state => ({ ...state }))
+  const [loading, setLoading] = useState(false)
+
+  const handleClick = async () => {
+    setLoading(true)
+    try {
+      let res = await createConnectAccount(auth.token)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+      toast.error('Stripe connection failed')
+      setLoading(false)
+    }
+  }
+
   const connected = () => (
     <div className='container-fluid pt-3'>
       <div className='row'>
@@ -29,7 +46,9 @@ const DashboardSeller = () => {
             <HomeOutlined className='h2' />
             <h4>Setup stripe for rentals</h4>
             <p>Transfer earnings to your bank account</p>
-            <button className='btn btn-primary'>Setup Payouts</button>
+            <button onClick={handleClick} className='btn btn-primary'>
+              Setup Payouts
+            </button>
             <p className='text-muted'>
               <small>
                 You will be redirected to stripe for onboarding process.
