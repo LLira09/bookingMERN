@@ -46,8 +46,12 @@ const DashboardSeller = () => {
             <HomeOutlined className='h2' />
             <h4>Setup stripe for rentals</h4>
             <p>Transfer earnings to your bank account</p>
-            <button onClick={handleClick} className='btn btn-primary'>
-              Setup Payouts
+            <button
+              disabled={loading}
+              onClick={handleClick}
+              className='btn btn-primary'
+            >
+              {loading ? 'Processing...' : 'Setup Payouts'}
             </button>
             <p className='text-muted'>
               <small>
