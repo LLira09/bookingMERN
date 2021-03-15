@@ -1,6 +1,6 @@
 import express from 'express'
 import router from './routes/auth'
-import stripeRoutes from './routes/stripe'
+// import stripeRoutes from './routes/stripe'
 // import { readdirSync } from 'fs'
 import cors from 'cors'
 import mongoose from 'mongoose'
@@ -28,7 +28,7 @@ app.use(express.json())
 
 // route middleware
 app.use('/api', router)
-app.use('/api/stripe', stripeRoutes)
+// app.use('/api/stripe', stripeRoutes)
 // readdirSync('./routes').map(r => app.use('/api', require(`./routes/${r}`)))
 
 const port = process.env.PORT || 8000
