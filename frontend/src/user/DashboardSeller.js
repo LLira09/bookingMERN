@@ -17,7 +17,7 @@ const DashboardSeller = () => {
       let res = await createConnectAccount(auth.token)
       console.log(res)
     } catch (err) {
-      console.log(err)
+      console.log(err, 'button failed')
       toast.error('Stripe connection failed')
       setLoading(false)
     }
